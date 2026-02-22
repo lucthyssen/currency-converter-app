@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Currency index{% endblock %}
+
+{% block body %}
+    <h1>Currency index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Code</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for currency in currencies %}
+            <tr>
+                <td>{{ currency.id }}</td>
+                <td>{{ currency.code }}</td>
+                <td>{{ currency.name }}</td>
+                <td>
+                    <a href="{{ path('app_currency_show', {'id': currency.id}) }}">show</a>
+                    <a href="{{ path('app_currency_edit', {'id': currency.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_currency_new') }}">Create new</a>
+{% endblock %}

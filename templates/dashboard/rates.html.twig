@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Historical Exchange Rates{% endblock %}
+
+{% block body %}
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message|raw }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+<h1>Exchange Rates</h1>
+<p>Wanneer je beide velden invult zie je de historische wisselkoersen tussen de geselecteerde valuta's.</p>
+<p>Wanneer je alleen een basisvaluta selecteert, zie je de wisselkoersen van die valuta ten opzichte van alle andere valuta's.</p>
+
+<form method="get">
+    <select name="base_currency" required>
+        <option value="">Select base currency</option>
+        {% for currency in currencies %}
+            <option value="{{ currency.code }}" {% if selectedBase == currency.code %}selected{% endif %}>
+                {{ currency.name }} ({{ currency.code }})
+            </option>
+        {% endfor %}
+    </select>
+
+    <select name="target_currency">
+        <option value="">All targets</option>
+        {% for currency in currencies %}
+            <option value="{{ currency.code }}" {% if selectedTarget == currency.code %}selected{% endif %}>
+                {{ currency.name }} ({{ currency.code }})
+            </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit">Show rates</button>
+</form>
+
+{% if rates %}
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Base</th>
+                <th>Target</th>
+                <th>Rate</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for rate in rates %}
+                <tr>
+                    <td>{{ rate.date|date('Y-m-d H:i') }}</td>
+                    <td>{{ rate.baseCurrency.code }}</td>
+                    <td>{{ rate.targetCurrency.code }}</td>
+                    <td>{{ rate.rate }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endif %}
+{% endblock %}

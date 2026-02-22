@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Allowed IPs{% endblock %}
+
+{% block body %}
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash-{{ label }}">
+            {{ message|raw }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+<h1>Allowed IPs</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>IP / Subnet</th>
+            <th>Description</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ip in ips %}
+            <tr>
+                <td>{{ ip.ipOrSubnet }}</td>
+                <td>{{ ip.description }}</td>
+                <td>
+                    <a href="{{ path('admin_edit_ip', {'id': ip.id}) }}">Edit</a>
+                    <a href="{{ path('admin_delete_ip', {'id': ip.id}) }}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{{ path('admin_create_ip') }}">Add new IP</a>
+
+{% endblock %}

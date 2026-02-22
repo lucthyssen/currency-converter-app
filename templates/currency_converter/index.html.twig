@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Currency Converter{% endblock %}
+
+{% block body %}
+<h1>Currency Converter</h1>
+
+<form method="get">
+    <input type="number" step="0.01" name="amount" value="{{ amount|default(1) }}" required>
+    <select name="base_currency" required>
+        <option value="">Select base currency</option>
+        {% for currency in currencies %}
+            <option value="{{ currency.code }}" {% if selectedBase == currency.code %}selected{% endif %}>
+                {{ currency.name }} ({{ currency.code }})
+            </option>
+        {% endfor %}
+    </select>
+    <button type="submit">Convert</button>
+</form>
+
+{% if convertedRates %}
+    <h2>Results for {{ amount }} {{ selectedBase }}</h2>
+    <ul>
+        {% for code, value in convertedRates %}
+            <li>{{ code }}: {{ value|number_format(2, '.', ',') }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+{% endblock %}

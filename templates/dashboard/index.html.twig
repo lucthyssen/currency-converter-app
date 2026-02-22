@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Currency Converter
+{% endblock %}
+
+{% block body %}
+    <h1>
+        Dashboard
+    </h1>
+
+    {# links to converter and rates #}
+    <nav>
+        <ul>
+            <li><a href="{{ path('currency_converter') }}">Converter</a></li>
+            <li><a href="{{ path('dashboard_exchange_rates') }}">Exchange Rates</a></li>
+            <li><a href="{{ path('admin_allowed_ips') }}">Allowed IPs</a></li>
+        </ul>
+    </nav>
+
+    {# navigation to other sections of the dashboard #}
+
+    {# make a nice table and loop through currencies and give option to update rates with a fa fa icon #}
+    <table>
+        <thead>
+            <tr>
+                <th>Currency</th>
+                <th>Code</th>
+                <th>Rate</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for currency in currencies %}
+                <tr>
+                    <td><a href="{{ path('dashboard_exchange_rates', {'base_currency': currency.code}) }}">{{ currency.name }}</a></td>
+                    <td>{{ currency.code }}</td>
+                    <td>{{ currency.latestRate }}</td>
+                    <td>
+                        {# update single currency #}
+                        <form method="post" action="{{ path('dashboard_import_rates', {'baseCurrency': currency.code}) }}">
+                            <button type="submit">
+                                Update
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    
+    {# update all currencies #}
+    <form method="post" action="{{ path('dashboard_import_rates') }}">
+        <button type="submit">
+            Update all rates
+        </button>
+    </form>
+
+{% endblock %}

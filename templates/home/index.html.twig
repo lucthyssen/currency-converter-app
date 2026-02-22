@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Homepage{% endblock %}
+
+{% block body %}
+
+{# overview with links to the login page, /converter en /rates #}
+<h1>Currency Converter App</h1>
+
+<ul>
+    <li><a href="{{ path('app_login') }}">Login</a></li>
+    <li><a href="{{ path('currency_converter') }}">Currency Converter</a></li>
+    <li><a href="{{ path('dashboard_exchange_rates') }}">Exchange Rates</a></li>
+</ul>
+
+{% endblock %}
