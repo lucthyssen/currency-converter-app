@@ -20,7 +20,7 @@ Functies:
 
 1. Clone de repo
 ```bash
-git clone https://github.com/yourusername/currency-converter-app.git
+git clone https://github.com/lucthyssen/currency-converter-app.git
 cd currency-converter-app
 ```
 2. Kopieer `.env.example` naar `.env` en pas de database credentials aan
