@@ -57,4 +57,4 @@ php bin/console app:import-exchange-rates [baseCurrency]
 - `baseCurrency` is optioneel, standaard is EUR. Hiermee worden de rates van de opgegeven base currency geïmporteerd. Zonder argument worden alle beschikbare rates geïmporteerd.
 
 ## Tijd besteed
-- In totaal heb ik 5 uur besteed aan deze opdracht, inclusief het schrijven van deze readme en het inleveren van de opdracht
+- In totaal heb ik 4:30 uur besteed aan deze opdracht, inclusief het schrijven van deze readme en het inleveren van de opdracht
